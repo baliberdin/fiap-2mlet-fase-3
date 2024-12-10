@@ -2,25 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-    verifyToken: function (req, res, next){
-        const token = req.headers['authorization'];
-        if (!token) {
-            return res.redirect("/login");
-        }
-        
-        jwt.verify(token, 'secret', (err, decoded) => {
-            if (err) {
-              return res.redirect("/login");
-            }
-            req.user = decoded;
-            next();
-        });
-    },
-
-    signToken: function(username){
-      const token = jwt.sign({ username: username }, 'secret');
-    },
-
     cryptCredentials: function(target){
       return new Promise((resolve, reject) => {
         bcrypt.hash(target, 8, function(err, hash){
