@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql
+    hostname: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - ./mysql/startup.sql:/docker-entrypoint-initdb.d/startup.sql
+    networks:
+      - development
+
+  book-store:
+    image: book-store
+    container_name: book-store
+    hostname: book-store
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./book-store/.env:/opt/book-store/.env
+    networks:
+      - development
+
+  recommendation-api:
+    image: recommendation-api
+    container_name: recommendation-api
+    hostname: recommendation-api
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - .env:/opt/recommendation-api/.env
+    networks:
+      - development
+
+networks:
+  development:
+    driver: bridge
