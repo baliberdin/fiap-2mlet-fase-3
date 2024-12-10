@@ -1,0 +1,15 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.img-200 {
+  max-width: 200px;
+}
+
+.card-img-top {
+  background-image: url('/images/no-image.png');
+  background-size: 290px;
+  background-position: 0,0;
+}

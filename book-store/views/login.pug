@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  br
+
+  .row.row-cols-3.gx-5.gy-5.my-5
+    .col
+    .col
+        h2 Cadastrar ou Entrar
+        p Caso o seu usuário ainda não exista, um novo será criado.
+        form.needs-validation(action="/login" method="POST" novalidate)
+          .mb-3.form-floating 
+            input#login-username.form-control(name="username" required)
+            label.form-label(for="login-username") Usuário
+          .mb-3.form-floating 
+            input#login-password.form-control(name="password" type="password" required)
+            label.form-label(for="login-password") Senha
+          .mb-3
+            button.btn.btn-success.me-2(type="submit") Entrar
+            a.btn.btn-warning(href="/") Cancelar
+
+block footer
+  script(src="/javascripts/login.js")
