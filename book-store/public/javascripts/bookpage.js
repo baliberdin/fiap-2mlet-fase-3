@@ -20,7 +20,7 @@ window.onload = function(){
                 ratingLabel.innerHTML = "Precisa insistir, mas não melhora muito";
                 break;
             case 5:
-                ratingLabel.innerHTML = "Não é péssimo, mas também não é ótimo!"; //"Precisa insistir, mas não melhora muito" "Tem seus momentos bons, vai"
+                ratingLabel.innerHTML = "Não é péssimo, mas também não é ótimo!";
                 break;
             case 6:
                 ratingLabel.innerHTML = "Dá para perder um tempo!";
