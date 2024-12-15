@@ -13,3 +13,9 @@ a {
   background-size: 290px;
   background-position: 0,0;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

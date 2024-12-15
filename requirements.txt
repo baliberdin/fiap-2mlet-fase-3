@@ -1,0 +1,13 @@
+
+Faker==33.1.0
+ipykernel==6.29.5
+numpy==2.2.0
+pandas==2.2.3
+pyspark==3.5.3
+scikit-learn==1.6.0
+scipy==1.14.1
+SQLAlchemy==2.0.36
+PyMySQL==1.1.1
+matplotlib==3.9.3
+swifter==1.4.0
+pandas-parallel-apply==2.2
