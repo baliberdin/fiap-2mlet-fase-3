@@ -37,7 +37,7 @@ Mas antes de subir todas as aplicações algumas configurações e setups precis
 
 ### Instalando o virtualenv e as libs
 ```sh
-    make setup
+make setup
 ```
 
 ### Baixando os datasets
@@ -47,23 +47,22 @@ e descompacte os arquivos em ./datasets/books
 ### Preparando o banco de dados
 Suba o MySQL e carregue os dados rodando o notebook de import
 ```sh
-    make recreate-db
-    make run-import-notebook
+make recreate-db
+make run-import-notebook
 ```
 
 ### Treinando o modelo de recomendação
 ```sh
-    make run-model-generation-notebook
+make run-model-generation-notebook
 ```
 
 ### Subindo os containers das aplicações
 ```sh
-    make restart-book-store
-    make restart-recommendation-api
+make restart-book-store
+make restart-recommendation-api
 ```
 
-
-Abra o arquivo Makefile para ver todas as tasks que podem ser executadas, como por exemplo reiniciar apenas uma aplicação ou banco.
+Abra o arquivo Makefile para ver todas as tasks que podem ser executadas, como por exemplo realizar um dump do banco de dados.
 
 # Acessando as aplicações
 - [WebApp - Book Store](http://localhost:3000)
