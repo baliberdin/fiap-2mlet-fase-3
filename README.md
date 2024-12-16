@@ -18,10 +18,12 @@ Os sistemas são separado nas seguintes partes:
 ## Subindo as aplicações
 Com exceção dos notebooks, o restante das aplicações são iniciadas usando Docker. Para iniciar as aplicações utilize as automações feitas em Makefile.
 
-Subindo todas as aplicações
-```sh
-make run-all
-```
+Mas antes de subir todas as aplicações algumas configurações e setups precisam ser feitos, na seguinte ordem, e será detalhado mais abaixo:
+ - Setup do ambiente
+ - Download do dataset
+ - Preparar o banco de dados
+ - Treinar o modelo de recomendação
+ - Subir os containers das aplicações
 
 ### Pré-Requisitos para rodar as aplicações
 - Make
@@ -33,12 +35,33 @@ make run-all
 - Visual Code
 - Java JDK 17+ (Apenas para os notebooks com PySpark)
 
-
-# Carregando os dados no banco MySQL
-Os dados usados pela aplicação estão em um backup `mysql/db_backup.sql` e para restaurá-los, utilize o comando abaixo. O comando só funcionará quando o banco MySQL estiver pronto para uso após o comando `make run-all` mostrado no passo `Subindo as aplicações`
+### Instalando o virtualenv e as libs
 ```sh
-make restore-db
+    make setup
 ```
+
+### Baixando os datasets
+Faça download do dataset que está no link https://www.kaggle.com/datasets/saurabhbagchi/books-dataset/data
+e descompacte os arquivos em ./datasets/books
+
+### Preparando o banco de dados
+Suba o MySQL e carregue os dados rodando o notebook de import
+```sh
+    make recreate-db
+    make run-import-notebook
+```
+
+### Treinando o modelo de recomendação
+```sh
+    make run-model-generation-notebook
+```
+
+### Subindo os containers das aplicações
+```sh
+    make restart-book-store
+    make restart-recommendation-api
+```
+
 
 Abra o arquivo Makefile para ver todas as tasks que podem ser executadas, como por exemplo reiniciar apenas uma aplicação ou banco.
 
