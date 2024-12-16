@@ -23,7 +23,8 @@ module.exports = {
                     b.author, 
                     b.publication_year, 
                     b.publisher, 
-                    b.image_url, 
+                    b.image_url,
+                    b.category, 
                     avg(r.rating) as avg_rating, 
                     count(r.id) as votes  
                 FROM books b 
@@ -73,4 +74,38 @@ module.exports = {
             );
         });
     },
+
+    selectUsersBestRatedRelatedBooks: async function(isbn){
+        return new Promise( (resolve, reject) => {
+            pool.query(`
+                select 
+                    r.isbn, 
+                    b.title,
+                    b.author,
+                    b.publisher,
+                    b.publication_year,
+                    b.image_url,
+                    b.category,
+                    avg(rating)*0.2+count(1)*0.05 as score, 
+                    avg(rating) as avg_rating,
+                    count(1) as votes 
+                from ratings r
+                left join books b on b.isbn = r.isbn
+                where 
+                    user_id in (select user_id from ratings where isbn = ? and rating > 5)
+                    and rating > 5
+                group by 1,2,3,4,5,6,7 
+                having 
+                    votes > 2 and 
+                    isbn != ? 
+                order by score desc
+                limit 5
+                `,[isbn, isbn],
+                function (err, results, fields) {
+                    if(err)reject(err);
+                    resolve(results);
+                }
+            );
+        })
+    }
 }

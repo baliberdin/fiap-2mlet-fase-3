@@ -1,0 +1,7 @@
+.venv
+.tool-versions
+node_modules
+/models/*
+__pycache__
+*.pickle
+_*.ipynb

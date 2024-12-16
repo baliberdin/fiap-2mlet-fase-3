@@ -4,12 +4,13 @@ block content
   .my-5
   h1= book.title
   p= `${book.publication_year} - ${book.author} - ${book .publisher}`
-
+    .badge.bg-success= book.category
+  
   .row.row-cols-3.gx-5.gy-5
     for b in [book]
       .col
         .card
-          image.card-img-top.rounded(src=`${b.image_url}` title=b.title alt=b.title)
+          img.card-img-top.rounded(src=`${b.image_url}` title=b.title alt=b.title onerror="if (this.src != '/images/no-image.png') this.src = '/images/no-image.png';")
       .col
         form(action=`/book/${book.isbn}` method="POST")
           h3 Você já leu esse livro? 
@@ -22,19 +23,37 @@ block content
         .badge.bg-secondary.badge-success.me-2= `Pontuação: ${new Number(book.avg_rating).toFixed(2)}`
         .badge.bg-secondary.badge-success= `Avaliações: ${book.votes}`
   br
-  br
+  
   if recommendations.length > 0
-    h2 Talvez você também goste desses livros também
+    hr
+    br
+    h2 Talvez você goste desses livros também
     .row.row-cols-5.gx-5.gy-5
       for r in recommendations
         .col
           a.card-image-top(href=`/book/${r.isbn}`)
             .card.h-100
-              image.card-img-top.rounded(src=`${r.image_url}` title=r.title alt=r.title)
+              img.card-img-top.rounded(src=`${r.image_url}` title=r.title alt=r.title onerror="if (this.src != '/images/no-image.png') this.src = '/images/no-image.png';")
               .card-body
                   h5.card-title= r.title
                   p.card-text= `${r.publication_year} - ${r.author} - ${r.publisher}`
-
+                  .badge.bg-success= r.category
+  br
+  
+  if userRelated.length > 0
+    hr
+    br
+    h2 Outros leitores também recomendam esses aqui
+    .row.row-cols-5.gx-5.gy-5
+      for r in userRelated
+        .col
+          a.card-image-top(href=`/book/${r.isbn}`)
+            .card.h-100
+              img.card-img-top.rounded(src=`${r.image_url}` title=r.title alt=r.title onerror="if (this.src != '/images/no-image.png') this.src = '/images/no-image.png';")
+              .card-body
+                  h5.card-title= r.title
+                  p.card-text= `${r.publication_year} - ${r.author} - ${r.publisher}`
+                  .badge.bg-success= r.category
   br
 block footer 
   script(src="/javascripts/bookpage.js")
