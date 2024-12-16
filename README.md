@@ -1,5 +1,7 @@
 # FIAP 2MLET Fase 3
-Projeto para a fase 3 do curso de Machine Learning Engineering da FIAP
+Projeto para a fase 3 do curso de Machine Learning Engineering da FIAP.
+
+Base de dados utilizada: https://www.kaggle.com/datasets/saurabhbagchi/books-dataset/data
 
 ## Estrutura
 O projeto é uma simples Loja de Livros onde os usuários podem pesquisar e avaliar os livros. Com base nas avaliações dos usuários, um modelo de ML servido por uma API produz uma lista de livros relacionados quando o usuário acessa a página de um livro qualquer. 

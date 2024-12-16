@@ -43,6 +43,11 @@ restore-db:
 	@docker cp ./mysql/restoredb.sh mysql:/tmp/restoredb.sh
 	@docker exec mysql /tmp/restoredb.sh ${DBPASS}
 
+store-updae-home-books:
+	@docker cp ./mysql/home_books.sql mysql:/tmp/home_books.sql
+	@docker cp ./mysql/home_books.sh mysql:/tmp/home_books.sh
+	@docker exec mysql /tmp/home_books.sh ${DBPASS}
+
 mysql-dump:
 	@docker cp ./mysql/dump.sh mysql:/tmp/dump.sh
 	@docker exec -t mysql /tmp/dump.sh ${DBPASS}
