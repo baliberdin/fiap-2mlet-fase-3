@@ -38,6 +38,10 @@ restart-book-store: build-book-store
 run-model-generation-notebook:
 	@jupyter nbconvert --to notebook --execute notebooks/books-recommendation-db.ipynb --output=_books-recommendation-db.ipynb
 
+run-import-notebook:
+	@jupyter nbconvert --to notebook --execute notebooks/data-import.ipynb --output=_data-import.ipynb
+
+
 restore-db:
 	@docker cp ./mysql/db_backup.sql mysql:/tmp/db_backup.sql
 	@docker cp ./mysql/restoredb.sh mysql:/tmp/restoredb.sh
@@ -65,4 +69,9 @@ start-mysql:
 	@until `docker exec  mysql mysql -u book_store --password=1234  1>/dev/null 2>/dev/null`; do echo -n "."; sleep 2; done
 	@echo "MySQL Done."
 
-recreate-db: stop-mysql start-mysql restore-db
+recreate-db: stop-mysql start-mysql
+
+setup:
+	@echo "Criando virtualenv"
+	@python -m venv .venv
+	@bash -c "source .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
