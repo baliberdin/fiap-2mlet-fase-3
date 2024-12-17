@@ -30,8 +30,8 @@ router.get('/book/:isbn', async function(req, res, next) {
   try{
     Promise.all([
       recommendationService.getBookRecommendations(req.params['isbn']),
-      bookService.selectByISBN(req.params['isbn']),
-      bookService.selectUsersBestRatedRelatedBooks(req.params['isbn'])
+      bookService.selectByISBN(req.params['isbn'])
+      //bookService.selectUsersBestRatedRelatedBooks(req.params['isbn'])
     ]).then( (values) => {
       res.render('book', { book: values[1], user: req.session.user, recommendations: values[0], userRelated: values[2] });
     }).catch( (e) => {
